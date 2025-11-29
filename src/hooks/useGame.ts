@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { moveMapIn2048Rule, type Map2048 } from '../game/2048/logic'; // 네 코드가 있는 파일 경로에 맞춰 import
+import { type Map2048, moveMapIn2048Rule } from '../game/2048/logic'; // 네 코드가 있는 파일 경로에 맞춰 import
 type Cell = number | null;
 
 const LS_KEY = 'game2048';
@@ -28,7 +28,7 @@ const spawnRandomTile = (map: Map2048): Map2048 => {
 
   const { r, c } = empty[Math.floor(Math.random() * empty.length)];
   const value = Math.random() < 0.9 ? 2 : 4;
-  const next = map.map((row: Cell[])=> [...row]);
+  const next = map.map((row: Cell[]) => [...row]);
   next[r][c] = value;
   return next;
 };
@@ -64,22 +64,28 @@ export function useGame() {
     localStorage.setItem(LS_KEY, JSON.stringify(state));
   }, [map, over]);
 
-  const doMove = useCallback((dir: 'up' | 'down' | 'left' | 'right') => {
-    if (over) return;
+  const doMove = useCallback(
+    (dir: 'up' | 'down' | 'left' | 'right') => {
+      if (over) return;
 
-    const { result, isMoved } = moveMapIn2048Rule(map, dir);
-    if (!isMoved) return;
+      const { result, isMoved } = moveMapIn2048Rule(map, dir);
+      if (!isMoved) return;
 
-    const spawned = spawnRandomTile(result);
-    setMap(spawned);
+      const spawned = spawnRandomTile(result);
+      setMap(spawned);
 
-    if (has128(spawned)) setOver(true);
-  }, [map, over]);
+      if (has128(spawned)) setOver(true);
+    }, 
+    [map, over]
+  );
 
   // 방향키 입력
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      const keyMap: Record<string, 'up' | 'down' | 'left' | 'right' | undefined> = {
+      const keyMap: Record<
+        string,
+        'up' | 'down' | 'left' | 'right' | undefined
+      > = {
         ArrowUp: 'up',
         ArrowDown: 'down',
         ArrowLeft: 'left',

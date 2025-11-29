@@ -9,7 +9,9 @@ export default function App() {
       <h1>2048 (128 만들면 종료)</h1>
       <div style={{ marginBottom: 8 }}>
         <button onClick={reset}>새 게임</button>
-        {over && <span style={{ marginLeft: 12, fontWeight: 700 }}>게임 종료 🎉</span>}
+        {over && (
+          <span style={{ marginLeft: 12, fontWeight: 700 }}>게임 종료 🎉</span>
+        )}
       </div>
 
       {/* 간단 렌더링 */}
@@ -29,16 +31,20 @@ export default function App() {
             <div
               key={`${r}-${c}`}
               style={{
-                width: 72, height: 72,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontWeight: 700, fontSize: 20,
+                width: 72,
+                height: 72,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 700,
+                fontSize: 20,
                 borderRadius: 6,
                 background: v ? '#eee4da' : '#cdc1b4',
               }}
             >
               {v ?? ''}
             </div>
-          )),
+          ))
         )}
       </div>
 
