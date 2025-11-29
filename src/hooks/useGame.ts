@@ -75,7 +75,7 @@ export function useGame() {
       setMap(spawned);
 
       if (has128(spawned)) setOver(true);
-    }, 
+    },
     [map, over]
   );
 
