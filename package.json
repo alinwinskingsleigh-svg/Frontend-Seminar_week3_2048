@@ -9,6 +9,11 @@
     "lint": "biome lint .",
     "check:types": "tsc",
     "check:format": "biome check .",
+    "fix:format": "biome format .",
+    "fix:unsafe": "biome unsafe-fix .",
+    "fix:unused": "knip --fix",
+    "fix:types": "tsc --noEmit",
+    "fix-all": "yarn fix:types && yarn fix:format && yarn fix:unused",
     "check:unused": "knip",
     "check-all": "yarn check:types && yarn check:format && yarn check:unused"
   },
